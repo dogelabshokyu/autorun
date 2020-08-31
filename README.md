@@ -1,0 +1,2 @@
+# autorun
+Ez setup
