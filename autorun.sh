@@ -16,6 +16,9 @@ chmod a+x ~/bin/repo
 #make repo can running on python3 well
 sed -i 's/\/usr\/bin\/env python/\/usr\/bin\/env python3/' repo
 
+#download chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
 #make dir for download AOSP source
 cd ~/ && mkdir Android && cd Android 
 mkdir aosp && mkdir los && mkdir rr && mkdir pe
