@@ -1,5 +1,9 @@
 #!/bin/bash
 #For ubuntu 20.04
+
+#change mirror server to kakao
+sudo sed -i 's/kr.archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+sudo apt-get update
 #install basic package
 sudo apt-get install -y git curl wget zsh gir1.2-gtop-2.0 gir1.2-nm-1.0 gir1.2-clutter-1.0
 #install ohmyzsh
