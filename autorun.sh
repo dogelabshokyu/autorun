@@ -18,7 +18,7 @@ PATH=~/bin:$PATH
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 #make repo can running on python3 well
-sed -i 's/\/usr\/bin\/env python/\/usr\/bin\/env python3/' repo
+sed -i 's/\/usr\/bin\/env python/\/usr\/bin\/env python3/' bin/repo
 
 #download chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
