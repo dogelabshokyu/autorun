@@ -35,22 +35,24 @@ sed -i 's/\/usr\/bin\/env python/\/usr\/bin\/env python3/' bin/repo
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
-#make dir for download AOSP source
+#make dir for download Android source
 cd ~/ && mkdir Android && cd Android 
 
 mkdir -p AOSP/10
 echo AOSP 10.0
-cd AOSP/10  && repo init -u https://android.googlesource.com/platform/manifest && cd ..
+cd AOSP/10  && repo init -u https://android.googlesource.com/platform/manifest -b android-10.0.0_r46 && cd ..
 
 mkdir -p LOS/17.1
 echo LineageOS 17.1
 cd LOS/17.1 && repo init -u git://github.com/LineageOS/android.git -b lineage-17.1 && cd ..
 
+mkdir -p RR/Q
 echo Resurrection Remix Q
-cd rr && repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b Q && cd ..
+cd RR/Q && repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b Q && cd ..
 
+mkdir -p PE/ten
 echo Pixel Experience ten
-cd pe && repo init -u repo init -u https://github.com/PixelExperience/manifest -b ten && cd ..
+cd PE/ten && repo init -u repo init -u https://github.com/PixelExperience/manifest -b ten && cd ..
 
 echo sync all
 repo sync
