@@ -1,5 +1,5 @@
 # autorun
-Ez setup
+### Installation
 | Method    | Command                                                                                           |
 |:----------|:--------------------------------------------------------------------------------------------------|
 | **curl**  | `sh -c "$(curl -fsSL https://raw.githubusercontent.com/dogelabshokyu/autorun/master/autorun.sh)"` |
