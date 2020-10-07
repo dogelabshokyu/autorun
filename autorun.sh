@@ -55,7 +55,8 @@ EOF
 
 function FUNC_PACKAGE()
 {
-	while[ -z $CMD_V_PACKAGE_INSTALL ]
+	while [ -z $CMD_V_PACKAGE_INSTALL ]
+
 	do
 		clear
 		echo "********************************************************************************"
@@ -67,46 +68,75 @@ function FUNC_PACKAGE()
 	echo "Install Package : $CMD_V_PACKAGE_INSTALL"
 	echo
 	exit
+}
+function FUNC_Kakao_mirror_server()
+{
+	sudo sed -i 's/kr.archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+	sudo apt-get update
+}
 
+function FUNC_PACKAGE_INSTALL()
+{
+	sudo apt-get install -y bc bison bison build-essential build-essential ccache clang curl curl curl flex fontconfig g++-multilib g++-multilib gcc-multilib gcc-multilib gir1.2-clutter-1.0 gir1.2-gtop-2.0 gir1.2-nm-1.0 git git git-core gnupg gnupg gperf gperf imagemagick lib32ncurses5-dev lib32ncurses5-dev lib32readline-dev lib32z1-dev lib32z1-dev libc6-dev-i386 libgl1-mesa-dev liblz4-tool liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libx11-dev libxml2 libxml2-utils libxml2-utils libxml2-utils lzop m4 make openjdk-8-jdk pngcrush python rsync schedtool squashfs-tools unzip unzip wget x11proto-core-dev xsltproc xsltproc zip zip zlib1g-dev zlib1g-dev zlib1g-dev:i386 zsh
+}
 
-#change mirror server to kakao
-sudo sed -i 's/kr.archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
-sudo apt-get update
+function FUNC_git_repo()
+{
+	mkdir ~/bin
+	PATH=~/bin:$PATH
+	curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+	chmod a+x ~/bin/repo
+	sed -i 's/\/usr\/bin\/env python/\/usr\/bin\/env python3/' bin/repo
+}
 
-#Setup build env
-sudo apt-get install -y bc bison bison build-essential build-essential ccache clang curl curl curl flex fontconfig g++-multilib g++-multilib gcc-multilib gcc-multilib gir1.2-clutter-1.0 gir1.2-gtop-2.0 gir1.2-nm-1.0 git git git-core gnupg gnupg gperf gperf imagemagick lib32ncurses5-dev lib32ncurses5-dev lib32readline-dev lib32z1-dev lib32z1-dev libc6-dev-i386 libgl1-mesa-dev liblz4-tool liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libx11-dev libxml2 libxml2-utils libxml2-utils libxml2-utils lzop m4 make openjdk-8-jdk pngcrush python rsync schedtool squashfs-tools unzip unzip wget x11proto-core-dev xsltproc xsltproc zip zip zlib1g-dev zlib1g-dev zlib1g-dev:i386 zsh
-#install Git-repo
-mkdir ~/bin
-PATH=~/bin:$PATH
-curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-chmod a+x ~/bin/repo
-#make repo can running on python3 well
-sed -i 's/\/usr\/bin\/env python/\/usr\/bin\/env python3/' bin/repo
+function FUNC_install_chrome()
+{
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	sudo dpkg -i google-chrome-stable_current_amd64.deb
+}
 
-#Download and install Google Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
+function FUNC_check_dir_exist()
+{
+	if [ -d $1 ]; then
+		echo "$1 exist"
+	fi
+	if [ ! -d $1 ]; then
+		echo "$1 not exist"
+	fi
+}
 
-#make dir for download Android source
-cd ~/ && mkdir Android && cd Android 
+function FUNC_mkdir_AOSP()
+{
+	mkdir -p AOSP/$ANDROID_VERSION
+}
 
-mkdir -p AOSP/10
-echo AOSP 10.0
-cd AOSP/10  && repo init -u https://android.googlesource.com/platform/manifest -b android-10.0.0_r46 && cd ..
+function FUNC_mkdir_LOS()
+{
+	mkdir -p LOS/$ANDROID_VERSION
+}
 
-mkdir -p LOS/17.1
-echo LineageOS 17.1
-cd LOS/17.1 && repo init -u git://github.com/LineageOS/android.git -b lineage-17.1 && cd ..
+function FUNC_mkdir_RR()
+{
+	mkdir -p RR/$ANDROID_VERSION
+}
 
-mkdir -p RR/Q
-echo Resurrection Remix Q
-cd RR/Q && repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b Q && cd ..
+function FUNC_mkdir_PE()
+{
+	mkdir -p PE/$ANDROID_VERSION
+}
 
-mkdir -p PE/ten
-echo Pixel Experience ten
-cd PE/ten && repo init -u repo init -u https://github.com/PixelExperience/manifest -b ten && cd ..
-
-echo sync all
-repo sync
-
-
+function FUNC_toy()
+{
+	echo "input is $1"
+}
+###########################################################################
+# menu script
+###########################################################################
+function FUNC_main_menu()
+{
+	FUNC_Kakao_mirror_server()
+	clear
+	FUNC_PACKAGE()
+}
+FUNC_check_dir_exist ../PANTECH
+FUNC_check_dir_exist PANTECH
