@@ -13,6 +13,7 @@
 #
 # change mirror server
 # setup build env for android build
+# set terminal size 132x43
 #
 #########################################
 
