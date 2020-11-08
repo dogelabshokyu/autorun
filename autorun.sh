@@ -70,18 +70,19 @@ function FUNC_PACKAGE()
 	echo
 	exit
 }
-function FUNC_Kakao_mirror_server()
+function FUNC_change_Kakao_mirror_server()
 {
+	sudo cp /etc/apt/sources.list /etc/apt/sources.list.BAK	#backup original apt server list
 	sudo sed -i 's/kr.archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 	sudo apt-get update
 }
 
-function FUNC_PACKAGE_INSTALL()
+function FUNC_install_BASIC_PACKAGE()
 {
 	sudo apt-get install -y bc bison bison build-essential build-essential ccache clang curl curl curl flex fontconfig g++-multilib g++-multilib gcc-multilib gcc-multilib gir1.2-clutter-1.0 gir1.2-gtop-2.0 gir1.2-nm-1.0 git git git-core gnupg gnupg gperf gperf imagemagick lib32ncurses5-dev lib32ncurses5-dev lib32readline-dev lib32z1-dev lib32z1-dev libc6-dev-i386 libgl1-mesa-dev liblz4-tool liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libx11-dev libxml2 libxml2-utils libxml2-utils libxml2-utils lzop m4 make openjdk-8-jdk pngcrush python rsync schedtool squashfs-tools unzip unzip wget x11proto-core-dev xsltproc xsltproc zip zip zlib1g-dev zlib1g-dev zlib1g-dev:i386 zsh
 }
 
-function FUNC_git_repo()
+function FUNC_install_git_repo()
 {
 	mkdir ~/bin
 	PATH=~/bin:$PATH
@@ -94,6 +95,13 @@ function FUNC_install_chrome()
 {
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
+}
+
+function FUNC_install_CoreCtrl
+{
+	sudo add-apt-repository ppa:ernstp/mesarc
+	sudo apt-get update
+	sudo apt-get install corectrl
 }
 
 function FUNC_check_dir_exist()
